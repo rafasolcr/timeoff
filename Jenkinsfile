@@ -8,14 +8,14 @@ pipeline {
   environment {
     CLUSTERNAME = ""
     ACCOUNT_ID = "087533072584"
-    CREDENTIALS_ID = "2c3c471e-ba61-4f58-bbe3-5348bcc8d95c"
+    CREDENTIALS_ID = "8917db01-4b48-4761-975c-d99fb89efad6"
 
   }
   stages {
     stage ("Docker build and Publish") {
       steps {
         node ("master"){
-          checkout([$class: "GitSCM", branches: [[name: "*/${params.BRANCH}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${env.CREDENTIALS_ID}", url: "git@github.com:rafasolcr/${env.JOB_NAME}.git"]]])
+          checkout([$class: "GitSCM", branches: [[name: "*/${params.BRANCH}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${env.CREDENTIALS_ID}", url: "https://github.com/rafasolcr/${env.JOB_NAME}.git"]]])
           script {
             def customImage = docker.build("${env.JOB_NAME}", ".")
             sh "docker tag ${env.JOB_NAME}:latest ${env.ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${env.JOB_NAME}-${env.BUILD_NUMBER}"
