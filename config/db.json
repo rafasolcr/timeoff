@@ -12,10 +12,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
+    "username": "master",
+    "password": "master1234",
     "database": "database_production",
-    "host": "127.0.0.1",
+    "host": "54.175.226.159",
     "dialect": "mysql"
   }
 }
